@@ -47,26 +47,26 @@ int main(void)
     printf("This is XOR encoded using a simple key %s\n", out);
 
     printf("Now see if you can figure out what the decoded password is: \n");
-    scanf("%s", &guess);
+    fgets(guess, MAX, stdin);
 
-    if ( strcmp(str1, guess) != 0 )
+    if ( strncmp(str1, guess, strlen(str1) -1) == 0 )
     {
-        printf("Nope, try again.\n");
-        return 1;
+        printf("Sweet!\n");
     } else {
-        printf("Great work.\n");
+        printf("Nope...\nTry again.\n");
+        return 1;
     }
 
     printf("Now see if you can figure out the XOR key: \n");
-    scanf("%s", &key);
+    fgets(key, MAX, stdin);
 
-    if ( strcmp(str2, key) != 0 )
+    if (strncmp(str2, key, strlen(str2) - 1) == 0 )
     {
-        printf("Try again!\n");
-        return 2;
+        printf("Great work!\n");
     } else {
-        printf("Excellent work, now onto the next one!\n");
+        printf("Give it another shot.\n");
+        return 2;
     }
-
+    
     return 0;
 }
