@@ -2,22 +2,22 @@
 #include<string.h>
 #include<sys/ptrace.h>
 
-char key[] = "DEAD";
+char key[] = "BAD";
 
 int welcome(void)
 {
-    printf("#Welcome to CTF 0.5#\n#This is REALLY easy ;-)#\n");
+    printf("#CTF 0x01#\n");
 }
 
 int main(void)
 {
-    char a[] = "COW";
+    char a[] = "F00D";
     char *c = strcat(key, a);
     const char guess[24] = {};
 
     if (ptrace(PTRACE_TRACEME, 0, 1, 0) < 0)
     {   
-        printf("Debuggig are we?\n");
+        printf("Debugging are we?\n");
         system("/usr/bin/firefox https://media.giphy.com/media/Vuw9m5wXviFIQ/giphy.gif");
         return 2;
     }
@@ -31,6 +31,7 @@ int main(void)
         return 1;
     } else {
         printf("Great work, now onto the next one.\n");
+        printf("Flag: %s\n", c);
     }
 
     return 0;
