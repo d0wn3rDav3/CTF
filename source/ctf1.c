@@ -2,7 +2,7 @@
 
 int welcome(void)
 {
-    printf("Welcome to CTF1\nJust find the sum\n");
+    printf("###CTF2###\nJust find the sum\n\n");
 }
 
 int main(void)
@@ -14,14 +14,17 @@ int main(void)
 
     i = x + y * z;
     
+    welcome();
+    
     printf("Please enter the total: \n");
     scanf("%d", &j);
 
     if ( i != j )
     {
-        printf("LOL, math.\n");
+        printf("lol, math.\n");
     } else {
         printf("Great work, onto the next one.\n");
+        printf("Flag: %d\n", i);
     }
     
     return 0;

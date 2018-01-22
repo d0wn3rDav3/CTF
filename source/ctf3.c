@@ -1,5 +1,7 @@
 #include<stdio.h>
 #include<string.h>
+#include<sys/ptrace.h>
+#include<time.h>
 
 #define MAX 24
 
@@ -44,10 +46,18 @@ int main(void)
     redHerring();
     printf("\n");
     
-    printf("This is XOR encoded using a simple key %s\n", out);
+    printf("This is XOR encoded using a simple key\n");
 
+
+    if (ptrace(PTRACE_TRACEME, 0, 1, 0) < 0)
+    {
+        printf("Now, just wait a little bit...\n");
+        __asm__("int3");
+    }
+    
     printf("Now see if you can figure out what the decoded password is: \n");
     fgets(guess, MAX, stdin);
+
 
     if ( strncmp(str1, guess, strlen(str1) -1) == 0 )
     {
@@ -56,6 +66,9 @@ int main(void)
         printf("Nope...\nTry again.\n");
         return 1;
     }
+    
+    printf("Now get past me.\n");
+    __asm__("int3");
 
     printf("Now see if you can figure out the XOR key: \n");
     fgets(key, MAX, stdin);
@@ -63,6 +76,7 @@ int main(void)
     if (strncmp(str2, key, strlen(str2) - 1) == 0 )
     {
         printf("Great work!\n");
+        printf("Flag: %s\n", str1);
     } else {
         printf("Give it another shot.\n");
         return 2;
